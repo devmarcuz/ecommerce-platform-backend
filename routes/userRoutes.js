@@ -4,6 +4,7 @@ const {
   loginUser,
   getUsers,
   updateUser,
+  getUser,
 } = require("../controllers/userController");
 const {
   addUserValidator,
@@ -24,7 +25,8 @@ router.post(
   validatorResults,
   use(loginUser)
 );
-router.get("/", authenticateJwt, getUsers);
+router.get("/", authenticateJwt, use(getUsers));
+router.get("/user/:id", authenticateJwt, use(getUser));
 router.put(
   "/update-user/:id",
   authenticateJwt,

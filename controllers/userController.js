@@ -68,6 +68,19 @@ exports.getUsers = async (req, res) => {
   res.status(200).json(users);
 };
 
+exports.getUser = async (req, res) => {
+  const id = req.params.id;
+
+  const user = await User.findById(id);
+
+  if (!user) {
+    res.status(400);
+    throw new Error("User does not exist");
+  }
+
+  return res.status(200).json({ user });
+};
+
 exports.updateUser = async (req, res) => {
   const id = req.params.id;
   const { email } = req.body;

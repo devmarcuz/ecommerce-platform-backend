@@ -6,7 +6,7 @@ const router = express.Router();
 const use = (fn) => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
 
-router.put("/create", authenticateJwt, use(createOrder));
+router.post("/create", authenticateJwt, use(createOrder));
 router.get("/find/:id", authenticateJwt, use(getUserOrder));
 
 module.exports = router;
